@@ -11,7 +11,9 @@ general_installer_node() {
     exit 1
   else
     #echo "Type the version of node"
-    #read NODEVERSION
+    #read NODE VERSION
+    [[ ! -d "$HOME/Downloads/" ]] && mkdir "$HOME/Downloads/"
+    [ ! -x "$(command -v wget)" ] && echo "please install wget" && exit 1
     cd "$HOME"/Downloads || exit
     wget https://nodejs.org/dist/v"$argv"/node-v"$argv"-linux-x64.tar.xz
     tar -xvf node-v"$argv"-linux-x64.tar.xz

@@ -8,12 +8,18 @@ general_cmd_github() {
   read -r PASSWORD
   echo "Type the repository name."
   read -r REPONAME
-  git config remote.origin.url https://"${USERNAME}":"${PASSWORD}"@github.com/"${USERNAME}"/"${REPONAME}".git
+  git config remote.origin.url https://"${USERNAME}":"${PASSWORD}\
+  "@github.com/"${USERNAME}"/"${REPONAME}".git
 }
 
 general_cmd_ssh() {
   DIR="$HOME/.ssh/"
   FILE="$HOME/.ssh/id_ed25519.pub"
+
+  [ ! -x "$(command -v ssh-keygen)" ] \
+  && echo "Please install ssh-keygen" \
+  && exit 1
+
   if [ -d "$DIR" ] && [ -f "$FILE" ]; then
     echo "You already have an SSH key Here it is:"
     echo ""
