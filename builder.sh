@@ -96,6 +96,25 @@ install() {
   [[ ! -d "$BUILD_FOLDER" ]] && echo "Please compile it first." \
   && exit 1
   [[ ! -d "$LOCAL_BIN" ]] && mkdir -p "$LOCAL_BIN"
+
+  if [[ -f "$LOCAL_BIN/$BUILD_FILE" ]]; then
+    echo -e "${RED}The project is already installed at:"\
+    "${CYAN}$LOCAL_BIN/$BUILD_FILE${RESET}"
+    echo -e "${RED}would you like to replaced it? [y/n]${RESET}"
+
+    read -r replaced
+    replaced_lower=${replaced,,}
+    if [ "$replaced_lower" == "y" ]; then
+      rm -f "$LOCAL_BIN/$BUILD_FILE"
+      echo -e "${YELLOW}$LOCAL_BIN/$BUILD_FILE${RESET}"\
+       "${BLUE} was removed to be replaced.${RESET}"
+      echo " "
+    else
+      echo -e "${GREEN}Nothing was done. ${RESET}"
+      exit 1
+    fi
+  fi
+
   cp "$BIN" "$LOCAL_BIN" && chmod 777 "$LOCAL_BIN/$BUILD_FILE"\
   && echo -e "${GREEN}The project has been installed at $LOCAL_BIN${RESET}"
 }

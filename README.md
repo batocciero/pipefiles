@@ -8,3 +8,8 @@ use bash builder.sh -debug or use the command bellow
 docker build -t test . && \
 docker run --rm -it --entrypoint bash --name ubuntu -v $PWD:/home/teste/auto ubuntu
 ```
+
+### Build the docker image to run on builder.sh
+```bash
+    docker build -t test .
+```

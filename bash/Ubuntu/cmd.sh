@@ -7,4 +7,13 @@ Ubuntu_cmd_update() {
   sudo apt clean
   sudo apt autoclean
   sudo apt autoremove -y
+
+  [ -x "$(command -v flatpak)" ] && \
+    flatpak update
+
+  [ -x "$(command -v snap)" ] && \
+    sudo snap refresh
+
+  [ -x "$(command -v brew)" ] && \
+    brew update && brew upgrade
 }
